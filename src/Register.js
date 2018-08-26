@@ -86,7 +86,7 @@ class Register extends Component {
 
     }else{
     console.log("onsubmit1")
-    const URL = "https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=NewContact&fname="+this.state.user.firstname+"&lname="+this.state.user.lastname+"&fbuser=&phone="+this.state.user.phone+"&email="+this.state.user.email+"&pass="+this.state.user.password+"&idcard="+this.state.user.idcard;
+    const URL = window.env.API_URL+"?function=NewContact&fname="+this.state.user.firstname+"&lname="+this.state.user.lastname+"&fbuser=&phone="+this.state.user.phone+"&email="+this.state.user.email+"&pass="+this.state.user.password+"&idcard="+this.state.user.idcard;
     this.setState({
       loading:true  
     })

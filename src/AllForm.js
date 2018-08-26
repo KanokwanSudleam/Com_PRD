@@ -46,7 +46,7 @@ class AllForm extends Component{
 		this.checkDisable = this.checkDisable.bind(this);
 	}
 	componentDidMount() {
-		var URL = "https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=GetSubCategoryByMainCategory&category="+this.props.fieldValues.subcate2+"&sourcefield=cf_1506&targetfield=cf_1510"
+		var URL = window.env.API_URL+"?function=GetSubCategoryByMainCategory&category="+this.props.fieldValues.subcate2+"&sourcefield=cf_755&targetfield=cf_1011"
 		axios
 		  .get(URL)
 		  .then(response => {

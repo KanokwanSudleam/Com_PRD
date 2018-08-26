@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import faker from 'faker';
 import React, { Component } from 'react';
 import {Search} from 'semantic-ui-react';
 import {Grid} from 'semantic-ui-react';
@@ -9,13 +8,7 @@ import { Affix, Button } from 'antd';
 import ContactID from './modules/ContactID';
 import Username from './modules/Username';
 
-const source = _.times(5, () => ({
-    title: faker.company.companyName(),
-    description: faker.company.catchPhrase(),
-    image: faker.internet.avatar(),
-    price: faker.finance.amount(0, 100, 2, '$'),
-  }))
-  const searchURL = "https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=GetAccountListByAccountName&accountname="
+  const searchURL = window.env.API_URL+"?function=GetAccountListByAccountName&accountname="
   var acclist = [];
   var idlist = [];
 

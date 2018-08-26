@@ -56,7 +56,7 @@ constructor(props){
 // componentDidMount() {
   componentWillMount() {
 
-  var URL = "https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=GetTicketListByContactID&contactid="+ContactID.getContactID();
+  var URL = window.env.API_URL+"?function=GetTicketListByContactID&contactid="+ContactID.getContactID();
   // var URL = window.env.API_URL+"?function=GetTicketListByContactID&contactid="+ContactID.getContactID();
   
   // var URL = window.env.API_URL+"?function=GetTicketListByContactID&contactid="+ContactID.getContactID(); 
@@ -144,7 +144,7 @@ constructor(props){
 			this.setState({active : value})
 		  }
 
-    var CardURL = "https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=GetTicketDetailByTicketID&ticketid="+value;
+    var CardURL = window.env.API_URL+"?function=GetTicketDetailByTicketID&ticketid="+value;
     this.setState({
       loadingpage:true
     })

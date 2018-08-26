@@ -151,7 +151,7 @@ class Catalog extends Component {
 	GetSubCategoryByMainCategory(category, sourcefield, targetfield) {
 
 		let nextValue = this.state.nextValue;
-		var getURL = "https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=GetSubCategoryByMainCategory&category="+category+"&sourcefield="+sourcefield+"&targetfield="+targetfield;
+		var getURL = window.env.API_URL+"?function=GetSubCategoryByMainCategory&category="+category+"&sourcefield="+sourcefield+"&targetfield="+targetfield;
 	  
 		  console.log("Save URL"+getURL)
 	  
@@ -181,10 +181,7 @@ class Catalog extends Component {
 	GetSubCategoryBack(category, sourcefield, targetfield) {
 
 		let nextValue = this.state.nextValue;
-		var getURL = "https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=GetSubCategoryByMainCategory&category="+category+"&sourcefield="+sourcefield+"&targetfield="+targetfield;
-	  
-		  console.log("Save URL"+getURL)
-	  
+		var getURL = window.env.API_URL+"?function=GetSubCategoryByMainCategory&category="+category+"&sourcefield="+sourcefield+"&targetfield="+targetfield;	  	  
 		  axios
 			.get(getURL)
 			.then(response => {
@@ -206,7 +203,7 @@ class Catalog extends Component {
 	GetSubCategoryProblem(category, sourcefield, targetfield) {
 		const fieldValues = this.props.fieldValues;
 		let nextValue = this.state.nextValue;
-		var getURL = "https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=GetSubCategoryByMainCategory&category="+category+"&sourcefield="+sourcefield+"&targetfield="+targetfield;
+		var getURL = window.env.API_URL+"?function=GetSubCategoryByMainCategory&category="+category+"&sourcefield="+sourcefield+"&targetfield="+targetfield;
 	  
 		  console.log("Save URL"+getURL)
 	  
@@ -319,7 +316,7 @@ class Catalog extends Component {
 				break;
 			case 1:
 				this.setState({checkProblem: false});				
-				this.GetSubCategoryByMainCategory(this.props.fieldValues.subcate2, "cf_1506", "cf_1508");
+				this.GetSubCategoryByMainCategory(this.props.fieldValues.subcate2, "cf_753", "cf_757");
 				break;
 		}
 

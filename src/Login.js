@@ -75,7 +75,7 @@ constructor(props){
         errors
       });
     }else{
-      const URL = "https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=CheckLogin&type=manual&email="+this.state.user.email+"&pass="+this.state.user.password+"&fbuser=";
+      const URL = window.env.API_URL+"?function=CheckLogin&type=manual&email="+this.state.user.email+"&pass="+this.state.user.password+"&fbuser=";
       this.setState({
         loader : true
       })
@@ -236,8 +236,8 @@ checkloader(){
       console.log("response"+JSON.stringify(resultObject.user))
       // Auth.authenticateUser(resultObject.response.authResponse.accessToken);
       Username.SetUser(this.state.username);
-      const facebookRegister = " https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=NewContact&fname=&lname=&fbuser="+resultObject.user.name+"&email="+resultObject.user.email+"&pass=&idcard=";
-      const facebookLogin = " https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=CheckLogin&type=facebook&email=&pass=&fbuser="+resultObject.user.name;
+      const facebookRegister = window.env.API_URL+"?function=NewContact&fname=&lname=&fbuser="+resultObject.user.name+"&email="+resultObject.user.email+"&pass=&idcard=";
+      const facebookLogin = window.env.API_URL+"?function=CheckLogin&type=facebook&email=&pass=&fbuser="+resultObject.user.name;
       axios
       .get(facebookLogin,{
         headers: {

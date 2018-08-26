@@ -8,22 +8,6 @@ const FormResponse = ({field,change,clickrequest,myColor}) => (
     <div className="container">
       <div className="row">
         <div className="col-12">
-          {/* <label  className="col-12 col-sm-12 col-form-label">สิ่งที่ต้องการให้ช่วยเหลือ<span className="font-red"> *</span></label> */}
-          {/* <div className="form-group row">
-            <label for="lblprocess" className="col-12 col-sm-12 col-form-label">สิ่งที่ต้องการให้คู่กรณีดำเนินการ</label>
-            <div className="col-12 col-sm-12">
-                <div class="form-group">
-                    <select className="form-control" id="request" value={field.request}  onChange={change} required>
-                        <option value=""></option>
-                        <option value="1. ชดเชยเยียวยาตามมูลค่าสินค่า">1. ชดเชยเยียวยาตามมูลค่าสินค่า</option>
-                        <option value="2. ชดเชยเยียวยาความเสียหาย">2. ชดเชยเยียวยาความเสียหาย</option>
-                        <option value="3. ดำเนินการ">3. ดำเนินการ</option>
-                        <option value="4. เว็บไซต์">4. เว็บไซต์</option>
-                        <option value="5. หยุดการดำเนินการ">5. หยุดการดำเนินการ</option>                    
-                    </select>
-                </div>
-            </div>
-        </div> */}
         <div>
             <ListGroup>
                 {/* <ListGroupItem className="text-left" style={{backgroundColor: myColor("1.ให้ชดเชยเยียวยา")}}  id="request" value="1.ให้ชดเชยเยียวยา" onClick={clickrequest}>1.ให้ชดเชยเยียวยา </ListGroupItem>

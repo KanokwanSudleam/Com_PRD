@@ -148,7 +148,7 @@ class PageStepper extends React.Component {
   submitRegistration(field_value){
     return function() {
       fieldValues = Object.assign({}, fieldValues, field_value)
-      var getURL = "https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=UpdateNewTicket&ticketid="
+      var getURL = window.env.API_URL+"?function=UpdateNewTicket&ticketid="
       // if(fieldValues.accountname == "-- ไม่ระบุคู่กรณี --"){
       //   var URL = getURL+fieldValues.ticketid+"&status=In Progress"+"&contactid="+fieldValues.contactid+"&title="+fieldValues.title+
       //   "&accountid=11x"+fieldValues.accountid+"&accountname="+fieldValues.accountname+"&category="+fieldValues.category+
@@ -197,7 +197,7 @@ class PageStepper extends React.Component {
   saveforlater(field_value) {
     return function() {
       fieldValues = Object.assign({}, fieldValues, field_value)
-      var getURL = "https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=UpdateNewTicket&ticketid="
+      var getURL = window.env.API_URL+"?function=UpdateNewTicket&ticketid="
       // if(fieldValues.accountname == "-- ไม่ระบุคู่กรณี --"){
       //   var URL = getURL+fieldValues.ticketid+"&status=Open"+"&contactid="+fieldValues.contactid+"&title="+fieldValues.title+
       //   "&accountid=11x"+fieldValues.accountid+"&accountname="+fieldValues.accountname+"&category="+fieldValues.category+

@@ -13,7 +13,7 @@ const googleAutoSuggestURL = `
 //suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=`;
 
 
-const searchURL = "https://cors-anywhere.herokuapp.com/"+window.env.API_URL+"?function=GetAccountListByAccountName&accountname="
+const searchURL = window.env.API_URL+"?function=GetAccountListByAccountName&accountname="
 
 var acclist = [];
 var idlist = [];

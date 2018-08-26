@@ -2,6 +2,7 @@
   "name": "mycomplaint",
   "version": "0.1.0",
   "private": true,
+  "Homepage" : "./",
   "proxy": "http://localhost:3000",
   "dependencies": {
     "antd": "^3.4.4",
