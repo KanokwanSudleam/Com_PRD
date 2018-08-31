@@ -32,7 +32,7 @@ class App extends Component {
       
       <nav className="navbar navbar-expand-md navbar-dark bg-dark">
           {/* <a className="navbar-brand"><IndexLink to="/">React App</IndexLink></a> */}
-          <Link to="/" className="navbar-brand">Customer Complaint</Link>
+          <Link to="/" className="navbar-brand">Consumer Complaint</Link>
           {/* <div className="navbar-brand">Complaint App </div> */}
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
