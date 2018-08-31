@@ -1,3 +1,3 @@
 window.env ={
-    API_URL : "https://vtiger7.crmvgo.com/websv/"
+    API_URL : "http://complaint.consumerthai.org/websv/"
 }

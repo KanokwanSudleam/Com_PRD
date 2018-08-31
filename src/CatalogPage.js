@@ -312,11 +312,11 @@ class Catalog extends Component {
 		switch (nextValue) {
 			case 0:
 				this.setState({check: false});
-				this.GetSubCategoryByMainCategory(this.props.fieldValues.subcate1, "cf_1518", "cf_1506");
+				this.GetSubCategoryByMainCategory(this.props.fieldValues.subcate1, "cf_753", "cf_755");
 				break;
 			case 1:
 				this.setState({checkProblem: false});				
-				this.GetSubCategoryByMainCategory(this.props.fieldValues.subcate2, "cf_753", "cf_757");
+				this.GetSubCategoryByMainCategory(this.props.fieldValues.subcate2, "cf_755", "cf_757");
 				break;
 		}
 

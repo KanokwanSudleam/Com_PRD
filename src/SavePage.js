@@ -121,13 +121,13 @@ class SaveForm extends Component{
 			<p className="text-center text-color">เพื่อดำเนินงานต่ออย่างมีประสิทธิภาพ<br></br>กรุณาระบุหน่วยงานรับผิดชอบที่ท่านต้องการ</p>
 			<div>
             <ListGroup>
-                <ListGroupItem className="text-left" id="ownerid" value="6" style={{backgroundColor: this.myColor("6")}} onClick={this.clickownerid}>มูลนิธิเพื่อผู้บริโภค (สำนักงานใหญ่) </ListGroupItem>
-                <ListGroupItem className="text-left" id="ownerid" value="14" style={{backgroundColor: this.myColor("14")}} onClick={this.clickownerid} >สมาคมผู้บริโภคขอนแก่น (ภาคอีสาน)</ListGroupItem>
-                <ListGroupItem className="text-left" id="ownerid" value="8" style={{backgroundColor: this.myColor("8")}} onClick={this.clickownerid}>สมาคมผู้บริโภคสงขลา (ภาคใต้)</ListGroupItem>
-				<ListGroupItem className="text-left" id="ownerid" value="11" style={{backgroundColor: this.myColor("11")}} onClick={this.clickownerid}>มูลนิธิพะเยาเพื่อการพัฒนา (ภาคเหนือ) </ListGroupItem>
-                <ListGroupItem className="text-left" id="ownerid" value="12" style={{backgroundColor: this.myColor("12")}} onClick={this.clickownerid} >สมาคมผู้บริโภคภาคตะวันตก (ภาคตะวันตก)</ListGroupItem>
-                <ListGroupItem className="text-left" id="ownerid" value="13" style={{backgroundColor: this.myColor("13")}} onClick={this.clickownerid}>สมาคมผู้บริโภคภาคตะวันออก (ภาคตะวันออก)</ListGroupItem>
-				<ListGroupItem className="text-left" id="ownerid" value="7" style={{backgroundColor: this.myColor("7")}} onClick={this.clickownerid}>มูลนิธิเพื่อผู้บริโภค (ภาคกลาง)</ListGroupItem>
+                <ListGroupItem className="text-left" id="ownerid" value="19x6" style={{backgroundColor: this.myColor("19x6")}} onClick={this.clickownerid}>มูลนิธิเพื่อผู้บริโภค (สำนักงานใหญ่) </ListGroupItem>
+                <ListGroupItem className="text-left" id="ownerid" value="19x14" style={{backgroundColor: this.myColor("19x14")}} onClick={this.clickownerid} >สมาคมผู้บริโภคขอนแก่น (ภาคอีสาน)</ListGroupItem>
+                <ListGroupItem className="text-left" id="ownerid" value="19x16" style={{backgroundColor: this.myColor("19x16")}} onClick={this.clickownerid}>สมาคมผู้บริโภคสงขลา (ภาคใต้)</ListGroupItem>
+				<ListGroupItem className="text-left" id="ownerid" value="19x17" style={{backgroundColor: this.myColor("19x17")}} onClick={this.clickownerid}>มูลนิธิพะเยาเพื่อการพัฒนา (ภาคเหนือ) </ListGroupItem>
+                <ListGroupItem className="text-left" id="ownerid" value="19x18" style={{backgroundColor: this.myColor("19x18")}} onClick={this.clickownerid} >สมาคมผู้บริโภคภาคตะวันตก (ภาคตะวันตก)</ListGroupItem>
+                <ListGroupItem className="text-left" id="ownerid" value="19x19" style={{backgroundColor: this.myColor("19x19")}} onClick={this.clickownerid}>สมาคมผู้บริโภคภาคตะวันออก (ภาคตะวันออก)</ListGroupItem>
+				<ListGroupItem className="text-left" id="ownerid" value="19x20" style={{backgroundColor: this.myColor("19x20")}} onClick={this.clickownerid}>มูลนิธิเพื่อผู้บริโภค (ภาคกลาง)</ListGroupItem>
             </ListGroup>
         </div>
 			  <div style={{marginTop: 12}}>

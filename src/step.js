@@ -164,7 +164,7 @@ class PageStepper extends React.Component {
         "&channel="+fieldValues.channel+"&productname="+fieldValues.productname+"&productprice="+fieldValues.productprice+
         "&purchasedate="+fieldValues.purchasedate+"&payment="+fieldValues.payment+"&purchase="+fieldValues.purchase
         +"&website="+fieldValues.website+"&store="+fieldValues.store+"&problem="+fieldValues.problem+"&damage="+fieldValues.damage+"&desc="+fieldValues.desc+
-        "&request="+fieldValues.new_request+"&ownerid=1x"+fieldValues.ownerid
+        "&request="+fieldValues.new_request+"&ownerid="+fieldValues.ownerid
       // }
 
 
@@ -213,7 +213,7 @@ class PageStepper extends React.Component {
       "&channel="+fieldValues.channel+"&productname="+fieldValues.productname+"&productprice="+fieldValues.productprice+
       "&purchasedate="+fieldValues.purchasedate+"&payment="+fieldValues.payment+"&purchase="+fieldValues.purchase
       +"&website="+fieldValues.website+"&store="+fieldValues.store+"&problem="+fieldValues.problem+"&damage="+fieldValues.damage+"&desc="+fieldValues.desc+
-      "&request="+fieldValues.new_request+"&ownerid=1x1"
+      "&request="+fieldValues.new_request+"&ownerid=19x1"
       // }
 
     console.log("Save URL"+URL)
