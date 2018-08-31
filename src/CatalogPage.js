@@ -69,7 +69,7 @@ class Catalog extends Component {
 		const {last,nextValue} = this.state;
 		// console.log("{stepBackBefore}",this.state.nextValue)
 		if(nextValue == 2){
-			this.GetSubCategoryBack(this.props.fieldValues.subcate1,"cf_1518", "cf_1506")
+			this.GetSubCategoryBack(this.props.fieldValues.subcate1,"cf_753", "cf_755")
 		}
 		else if (nextValue == 1) {
 		  this.setState({
