@@ -21,12 +21,14 @@ class EditType extends Component{
             fieldValues : JSON.parse(FieldValues.getFieldValues()) ,
             checkweb: false,
             checkstore : false,
-            loading : false
+            loading : false,
+            err_problem : false,
         }
         this.nextStep = this.nextStep.bind(this);
         this.saveLater = this.saveLater.bind(this);
         this.handleChange = this.handleChange.bind(this);   
         this.BackStep = this.BackStep.bind(this);
+        this.checkProblem = this.checkProblem.bind(this);
     }
 
     componentDidMount() {
@@ -100,6 +102,9 @@ class EditType extends Component{
 
     saveLater(e){
         e.preventDefault()
+        if(!this.checkProblem()){
+            return;
+        }
         message.success('เรื่องร้องเรียนของท่าน ยังไม่ได้ส่งเรื่องไปยังมูลนิธิเพื่อผู้บริโภค ท่านสามารถเลือกเรื่องร้องเรียนจากหน้าหลัก เพื่อแก้ไขได้ในภายหลัง',10);
         SaveForLater.saveLater(this.state.fieldValues)
 		//redirect
@@ -117,6 +122,17 @@ class EditType extends Component{
 				)
 		}catch(e){
 
+		}
+    }
+    checkProblem(){
+		const fieldValues = this.state.fieldValues;
+		if(fieldValues.problem == ''){
+			this.setState({
+				err_problem : true
+			  });	 
+			return false;
+		}else{
+			return true;
 		}
 	}
 
@@ -159,8 +175,13 @@ class EditType extends Component{
                                 <br></br>
                                 <div>
                                 <p><span className="text-color">กรุณาระบุรายละเอียดลักษณะปัญหาที่พบจาก </span> {this.state.fieldValues.accountname}</p>
-                                    <FormType field={this.state.fieldValues} change={this.handleChange} ddlproblem={this.ddlproblem}/>
+                                    <FormType field={this.state.fieldValues} change={this.handleChange} ddlproblem={this.ddlproblem} error={this.state.err_problem}/>
                                     <button type="button" className="btn btnback float-left" onClick={this.saveLater}>บันทึกเพื่อแก้ไขภายหลัง</button>
+                                    {/* {this.checkProblem()?(
+                                        <button type="button" className="btn btnback float-left" onClick={this.saveLater}>บันทึกเพื่อแก้ไขภายหลัง</button>
+                                    ):(
+                                        <button type="button" className="btn btnback float-left disabled" aria-disabled='ture'>บันทึกเพื่อแก้ไขภายหลัง</button>
+                                    )} */}
                                     {/* <button type="submit" className="btn btn-primary float-right">Next Step</button> */}
                                 <div  style={styleload}>
                                     <div className=" img-middle" style={{'background-color': 'rgba(0,0,0,.6)'}}>

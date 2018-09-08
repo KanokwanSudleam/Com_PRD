@@ -16,14 +16,15 @@ class AllForm extends Component{
 			stepForm: 0,
 			complete: false,
 			errors: {
-				productname:'',
-				purchasedate: '',
-				payment : '',
-				productprice : '',
-				purchase : '',
-    			website : '',
-    			store : '',
+				productname:false,
+				purchasedate:false,
+				payment :false,
+				productprice : false,
+				purchase : false,
+    			website : false,
+    			store : false,
 			},
+			err_problem : false,
 			checkweb:false,
 			checkstore:false,
 			active : null,
@@ -44,13 +45,15 @@ class AllForm extends Component{
 		this.myColor = this.myColor.bind(this);
 		this.valueDate = this.valueDate.bind(this);
 		this.checkDisable = this.checkDisable.bind(this);
+		this.checkSave = this.checkSave.bind(this);
+		this.checkProblem = this.checkProblem.bind(this);
+		this.turnbtn = this.turnbtn.bind(this);
 	}
 	componentDidMount() {
 		var URL = window.env.API_URL+"?function=GetSubCategoryByMainCategory&category="+this.props.fieldValues.subcate2+"&sourcefield=cf_755&targetfield=cf_1011"
 		axios
 		  .get(URL)
 		  .then(response => {
-			// console.log("Save res"+JSON.stringify(response))
 
 			const fieldValues = this.props.fieldValues;
 			fieldValues.ddlproblem = response.data
@@ -78,8 +81,14 @@ class AllForm extends Component{
    * @param {object} event - the JavaScript event object
    */
   nextStep(event) {
-    // prevent default action. in this case, action is the form submission event
 	event.preventDefault();
+	const fieldValues = this.props.fieldValues;
+	if(fieldValues.purchasedate == ''){
+		fieldValues.purchasedate = moment(new Date()).format('YYYY-MM-DD');   
+		this.setState({
+			fieldValues
+		});
+	}
 	this.setState({
 		loadPay:true
 	})
@@ -179,7 +188,8 @@ class AllForm extends Component{
 	valueDate(dateStr){
 		console.log("dateStr"+dateStr)
 		if(dateStr == ''){
-			return new Date()
+			//return moment(new Date()).format('YYYY-MM-DD');
+			return new Date();
 		}else{
 		const [year,month,day] = dateStr.split("-")
 		return new Date(year, month - 1, day)
@@ -204,10 +214,94 @@ class AllForm extends Component{
 	  }
 
 	saveLater(e){
-		e.preventDefault()
+		e.preventDefault();
+		var namebutton = e.currentTarget.getAttribute('name');
+		if(namebutton == "purchase_save"){
+			if(!this.checkSave()){ 
+				return; 
+			}
+		}else if(namebutton == "problem_save"){
+			if(!this.checkProblem()){
+				return;
+			}
+		}
+		const fieldValues = this.props.fieldValues;
+		if(fieldValues.purchasedate == ''){
+			fieldValues.purchasedate = moment(new Date()).format('YYYY-MM-DD');   
+			this.setState({
+				fieldValues
+			});
+		}
 		message.success('เรื่องร้องเรียนของท่าน ยังไม่ได้ส่งเรื่องไปยังมูลนิธิเพื่อผู้บริโภค ท่านสามารถเลือกเรื่องร้องเรียนจากหน้าหลัก เพื่อแก้ไขได้ในภายหลัง',10);
 		this.props.saveforlater(this.props.fieldValues)
 		this.setState({ redirect: true })
+	}
+
+	checkSave(){
+		const fieldValues = this.props.fieldValues;
+		let errors = Object.assign({}, this.state.errors);
+    		errors = {}
+    		this.setState({
+      			errors,
+      
+    	});
+		if(fieldValues.productname == '')
+		{
+			errors.productname = true;
+		}
+
+		if(fieldValues.payment == ''){
+			errors.payment = true;
+		}
+
+		if(fieldValues.productprice == ''){
+			errors.productprice = true;
+		}
+
+		if(fieldValues.purchase == ''){
+			errors.purchase = true;
+		}
+		
+		if(this.state.checkstore == true){
+			if(fieldValues.store == ''){
+				errors.store = true;
+			}
+		}
+		if(this.state.checkweb == true){
+			if(fieldValues.website == ''){
+				errors.website = true;
+			}
+		}
+		
+		if(JSON.stringify(errors) !== '{}'){
+			console.log("Error"+JSON.stringify(errors))
+			this.setState({
+			  errors
+			});	  
+		}else{
+			return true;
+		}
+	}
+	checkProblem(){
+		const fieldValues = this.props.fieldValues;
+		if(fieldValues.problem == ''){
+			this.setState({
+				err_problem : true
+			  });	 
+			return false;
+		}else{
+			return true;
+		}
+	}
+	turnbtn(e,btn){
+		if(btn == "next"){
+			this.nextStep(e)
+		}else if(btn == "save"){
+			this.saveLater(e)
+		}else{
+			console.log("Error")
+		}
+
 	}
 	getStep(stepForm){
 		const stylePay = this.state.loadPay == true ?{display:'block'}:{display:'none'};
@@ -224,7 +318,8 @@ class AllForm extends Component{
 									(3/4) รายละเอียดเรื่องร้องเรียน
 								</div>
 								<div className="col-3">
-									<button type="submit" className="btn btn-primary float-right">ถัดไป <i className="fa fa-angle-right"></i></button>
+								{/* onSubmit={this.nextStep} */}
+									<button type="submit" className="btn btn-primary float-right" name="nextbtn">ถัดไป <i className="fa fa-angle-right"></i></button>
 								</div>
 								</div>
 							</div>
@@ -236,9 +331,17 @@ class AllForm extends Component{
 				):(
 					<p><span className="text-color">กรุณาระบุการซื้อสินค้าหรือใช้บริการจาก</span> {this.props.fieldValues.accountname}</p>
 				)}
-				<FormPayment field={this.props.fieldValues} change={this.handleChange}  date={this.dateChange} web={this.state.checkweb} store={this.state.checkstore} valueDate={this.valueDate}/>
-				<button type="button" className="btn btnback float-left" onClick={this.saveLater}>บันทึกเพื่อแก้ไขภายหลัง</button>
+				<FormPayment field={this.props.fieldValues} change={this.handleChange}  date={this.dateChange} web={this.state.checkweb} store={this.state.checkstore} valueDate={this.valueDate} error={this.state.errors}/>
 				
+				<button type="button" className="btn btnback float-left" value="บันทึกเพื่อแก้ไขภายหลัง" name="purchase_save" onClick={this.saveLater}>บันทึกเพื่อแก้ไขภายหลัง</button>				
+				
+				{/* {this.checkSave()?( 
+					// <button type="button" className="btn btnback float-left" onClick={this.saveLater}>บันทึกเพื่อแก้ไขภายหลัง</button>
+					<button type="button" className="btn btnback float-left" onSubmit={this.saveLater}>บันทึกเพื่อแก้ไขภายหลัง</button>
+				):(
+					<button type="button" className="btn btnback float-left disabled" aria-disabled='ture'>บันทึกเพื่อแก้ไขภายหลัง</button>
+				)} */}
+					
 				<div  style={stylePay}>
 					<div className=" img-middle" style={{'background-color': 'rgba(0,0,0,.6)'}}>
                   		<img className="img-fluid img-loader" src="./img/color-loading.gif" />
@@ -259,7 +362,7 @@ class AllForm extends Component{
 									(3/4) รายละเอียดเรื่องร้องเรียน
 								</div>
 								<div className="col-3">
-									<button type="submit" className="btn btn-primary float-right">ถัดไป <i className="fa fa-angle-right"></i></button>
+									<button type="submit" className="btn btn-primary float-right" >ถัดไป <i className="fa fa-angle-right"></i></button>
 								</div>
 								</div>
 							</div>
@@ -272,8 +375,15 @@ class AllForm extends Component{
 						<p><span className="text-color">กรุณาระบุรายละเอียดลักษณะปัญหาที่พบจาก </span> {this.props.fieldValues.accountname}</p>
 					)}
 					{/* <button type="button" className="btn btn-primary"  onClick={this.BackStep}>Back</button> */}
-					<FormType field={this.props.fieldValues} change={this.handleChange} ddlproblem={this.ddlproblem}/>
-					<button type="button" className="btn btnback float-left" onClick={this.saveLater}>บันทึกเพื่อแก้ไขภายหลัง</button>
+					<FormType field={this.props.fieldValues} change={this.handleChange} ddlproblem={this.ddlproblem} error={this.state.err_problem}/>
+
+					<button type="button" className="btn btnback float-left" onClick={this.saveLater} name="problem_save">บันทึกเพื่อแก้ไขภายหลัง</button>
+					{/* {this.checkProblem()?(
+						<button type="button" className="btn btnback float-left" onClick={this.saveLater}>บันทึกเพื่อแก้ไขภายหลัง</button>
+					):(
+						<button type="button" className="btn btnback float-left disabled" aria-disabled='ture'>บันทึกเพื่อแก้ไขภายหลัง</button>
+					)}
+					 */}
 					
 					<div  style={stylePay}>
 					<div className=" img-middle" style={{'background-color': 'rgba(0,0,0,.6)'}}>

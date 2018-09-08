@@ -20,7 +20,16 @@ class Edit extends Component{
             fieldValues : JSON.parse(FieldValues.getFieldValues()) ,
             checkweb: false,
             checkstore : false,
-            loading : false
+            loading : false,
+            errors: {
+				productname:false,
+				purchasedate:false,
+				payment :false,
+				productprice : false,
+				purchase : false,
+    			website : false,
+    			store : false,
+			}
         }
         this.dateChange = this.dateChange.bind(this);
         this.nextStep = this.nextStep.bind(this);
@@ -28,6 +37,7 @@ class Edit extends Component{
         this.handleChange = this.handleChange.bind(this);   
         this.handlePrev = this.handlePrev.bind(this);
         this.valueDate = this.valueDate.bind(this);
+        this.checkSave = this.checkSave.bind(this);
     }
 
     componentDidMount() {
@@ -60,6 +70,13 @@ class Edit extends Component{
   nextStep(event) {
     // prevent default action. in this case, action is the form submission event
     event.preventDefault();
+    const fieldValues = this.state.fieldValues;
+	if(fieldValues.purchasedate == ''){
+		fieldValues.purchasedate = moment(new Date()).format('YYYY-MM-DD');   
+		this.setState({
+			fieldValues
+		});
+	}
     this.setState({
         loading:true
     })
@@ -137,7 +154,17 @@ class Edit extends Component{
     }
 
     saveLater(e){
-		e.preventDefault()
+        e.preventDefault();
+        const fieldValues = this.state.fieldValues;
+        if(!this.checkSave()){ 
+            return; 
+        }
+        if(fieldValues.purchasedate == ''){
+            fieldValues.purchasedate = moment(new Date()).format('YYYY-MM-DD');   
+            this.setState({
+                fieldValues
+            });
+        }
         message.success('เรื่องร้องเรียนของท่าน ยังไม่ได้ส่งเรื่องไปยังมูลนิธิเพื่อผู้บริโภค ท่านสามารถเลือกเรื่องร้องเรียนจากหน้าหลัก เพื่อแก้ไขได้ในภายหลัง',10);
         // this.props.saveforlater(this.state.fieldValues)
         SaveForLater.saveLater(this.state.fieldValues)
@@ -145,6 +172,52 @@ class Edit extends Component{
 		// this.context.router.replace('/');
 
     }
+
+    checkSave(){
+		const fieldValues = this.state.fieldValues;
+        let errors = Object.assign({}, this.state.errors);
+        errors = {}
+        this.setState({
+              errors,
+  
+        });
+        if(fieldValues.productname == '')
+        {
+            errors.productname = true;
+        }
+
+        if(fieldValues.payment == ''){
+            errors.payment = true;
+        }
+
+        if(fieldValues.productprice == ''){
+            errors.productprice = true;
+        }
+
+        if(fieldValues.purchase == ''){
+            errors.purchase = true;
+        }
+        
+        if(this.state.checkstore == true){
+            if(fieldValues.store == ''){
+                errors.store = true;
+            }
+        }
+        if(this.state.checkweb == true){
+            if(fieldValues.website == ''){
+                errors.website = true;
+            }
+        }
+        
+        if(JSON.stringify(errors) !== '{}'){
+            console.log("Error"+JSON.stringify(errors))
+            this.setState({
+            errors
+            });	  
+        }else{
+            return true;
+        }
+	}
     
     handlePrev(){
         this.context.router.replace('/');
@@ -189,8 +262,13 @@ class Edit extends Component{
                                 <div>
                                     {/* <button type="button" className="btn btn-primary" style={{marginRight: 12}} onClick={this.handlePrev}>Back</button> */}
                                     <p><span className="text-color">กรุณาระบุการซื้อสินค้าหรือใช้บริการจาก</span> {this.state.fieldValues.accountname}</p>
-                                    <FormPayment field={this.state.fieldValues} change={this.handleChange}  date={this.dateChange} web={this.state.checkweb} store={this.state.checkstore} valueDate={this.valueDate}/>
+                                    <FormPayment field={this.state.fieldValues} change={this.handleChange}  date={this.dateChange} web={this.state.checkweb} store={this.state.checkstore} valueDate={this.valueDate} error={this.state.errors}/>
                                     <button type="button" className="btn btnback float-left" onClick={this.saveLater}>บันทึกเพื่อแก้ไขภายหลัง</button>
+                                    {/* {this.checkSave()?(
+                                        <button type="button" className="btn btnback float-left" onClick={this.saveLater}>บันทึกเพื่อแก้ไขภายหลัง</button>                                    
+                                    ):(
+                                        <button type="button" className="btn btnback float-left disabled" aria-disabled='ture'>บันทึกเพื่อแก้ไขภายหลัง</button>                                        
+                                    )} */}
                                     {/* <button type="submit" className="btn btn-primary float-right">Next Step</button> */}
                                     </div>
                                     <div  style={styleload}>

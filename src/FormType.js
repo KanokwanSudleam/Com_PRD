@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const FormType = ({field,change,ddlproblem}) => (
+const FormType = ({field,change,ddlproblem,error}) => (
 
 <div>
     <div className="container">
         <div className="form-group row">
-            <label for="problem" className="col-12 col-sm-12 col-form-label">กรุณาระบุปัญหาที่เกิดจากการใช้สินค้าหรือบริการ</label>
+            <label for="problem" className="col-12 col-sm-12 col-form-label">กรุณาระบุปัญหาที่เกิดจากการใช้สินค้าหรือบริการ <span className="font-red"> *</span></label>
             <div className="col-12  col-sm-12">
                 {/* <input type="text" className="form-control" id="problem"  value={field.problem} onChange={change}  required/>
             </div> */}
@@ -16,6 +16,13 @@ const FormType = ({field,change,ddlproblem}) => (
                     </select>
                 </div>
             </div>
+            <div className="col-12 col-sm-12">
+                {error?(
+                        <p id='err_problem'  className="font-red">โปรดกรอกข้อมูล</p>                    
+                    ):(
+                        <p id='err_problem' style={{display:'none'}}>โปรดกรอกข้อมูล</p>                                        
+                    )}
+            </div> 
         </div>
         <div className="form-group row">
             <label for="damage" className="col-12 col-sm-12 col-form-label">มูลค่าความสียหายที่เกิดขึ้น / จำนวนเงินที่ต้องการชดเชย</label>

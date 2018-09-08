@@ -4,7 +4,7 @@ import DatePicker from 'material-ui/DatePicker';
 import moment from 'moment';
 
 
-const FormPayment = ({field,change,web,store,date,valueDate}) => (
+const FormPayment = ({field,change,web,store,date,valueDate,error}) => (
 
 <div>
     <div className="container">
@@ -13,6 +13,13 @@ const FormPayment = ({field,change,web,store,date,valueDate}) => (
             <label for="productname" className="col-12 col-sm-12 col-form-label">ชื่อสินค้า/บริการ<span className="font-red"> *</span></label>
             <div className="col-12 col-sm-12">
                 <input type="text" className="form-control" id="productname" placeholder="ยี่ห้อหรือรุ่นของสินค้าที่ซื้อ / ชื่อบริการที่ใช้" value={field.productname} onChange={change} required/>
+            </div>
+            <div className="col-12 col-sm-12">
+                {error.productname?(
+                    <p id='err_productname' className="font-red">โปรดกรอกข้อมูล</p>                    
+                ):(
+                    <p id='err_productname' style={{display:'none'}}>โปรดกรอกข้อมูล</p>                    
+                )}
             </div>
         </div>
         <div className="form-group row">
@@ -29,6 +36,13 @@ const FormPayment = ({field,change,web,store,date,valueDate}) => (
                     </select>
                 </div>
             </div>
+            <div className="col-12 col-sm-12">
+                {error.payment?(
+                    <p id='err_payment' className="font-red">โปรดกรอกข้อมูล</p>                    
+                ):(
+                    <p id='err_payment' style={{display:'none'}}>โปรดกรอกข้อมูล</p>                    
+                )}
+            </div>
         </div>
         <div className="form-group row">
             <label for="productpric" className="col-12 col-sm-12 col-form-label">ราคา<span className="font-red"> *</span></label>
@@ -39,6 +53,13 @@ const FormPayment = ({field,change,web,store,date,valueDate}) => (
                     </div>
                     <input type="number" className="form-control" id="productprice" placeholder="มูลค่าที่ซื้อสินค้าหรือบริการ" value={field.productprice} onChange={change} required/>
                 </div>
+            </div>
+            <div className="col-12 col-sm-12">
+            {error.productprice?(
+                    <p id='err_productname' className="font-red">โปรดกรอกข้อมูล</p>                    
+                ):(
+                    <p id='err_productprice' style={{display:'none'}}>โปรดกรอกข้อมูล</p>                                        
+                )}
             </div>
         </div>
         <div className="form-group row">
@@ -56,6 +77,13 @@ const FormPayment = ({field,change,web,store,date,valueDate}) => (
                     </select>
                 </div>
             </div>
+            <div className="col-12 col-sm-12">
+                {error.purchase?(
+                        <p id='err_purchase'  className="font-red">โปรดกรอกข้อมูล</p>                    
+                    ):(
+                        <p id='err_purchase' style={{display:'none'}}>โปรดกรอกข้อมูล</p>                                        
+                    )}
+            </div>
         </div>
         {store?(    
         <div className="form-group row">
@@ -63,6 +91,13 @@ const FormPayment = ({field,change,web,store,date,valueDate}) => (
             <div className="col-12 col-sm-12">
                 <input type="text" className="form-control" id="store" placeholder="ชื่อสาขาร้านค้า/องค์กร/หน่วยงาน" value={field.store} onChange={change} required/>
             </div>
+            <div className="col-12 col-sm-12">
+                {error.store?(
+                        <p id='err_store'  className="font-red">โปรดกรอกข้อมูล</p>                    
+                    ):(
+                        <p id='err_store' style={{display:'none'}}>โปรดกรอกข้อมูล</p>                                        
+                    )}
+            </div>     
         </div>
         ):null}
         {web ? (
@@ -71,6 +106,13 @@ const FormPayment = ({field,change,web,store,date,valueDate}) => (
             <div className="col-12 col-sm-12">
                 <input type="text" className="form-control" id="website"  value={field.website} onChange={change} required/>
             </div>
+            <div className="col-12 col-sm-12">
+                {error.website?(
+                        <p id='err_website'  className="font-red">โปรดกรอกข้อมูล</p>                    
+                    ):(
+                        <p id='err_website' style={{display:'none'}}>โปรดกรอกข้อมูล</p>                                        
+                    )}
+            </div> 
         </div>
         ):null}
         <div className="form-group row">
